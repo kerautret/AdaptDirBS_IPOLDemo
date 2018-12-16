@@ -1,0 +1,142 @@
+<%include file="header.html" />
+
+
+
+<p>
+The algorithm result is displayed hereafter. The result was obtained by the following parameters:
+<ul>
+  <li><i><font color="blue">n&theta;</font></i>&nbsp;=&nbsp;${ float(app.cfg['param']['theta'])}</li>
+  <li><i><font color="blue">Rmin</font></i>&nbsp;=&nbsp;${ float(app.cfg['param']['min_r'])}</li>
+  <li><i><font color="blue">Rmax</font></i>&nbsp;=&nbsp;${ float(app.cfg['param']['max_r'])}</li>
+  <li><i><font color="blue">nR</font></i>&nbsp;=&nbsp;${ float(app.cfg['param']['n_r'])}</li>
+  <li><i><font color="blue">isoMin</font></i>&nbsp;=&nbsp;${ float(app.cfg['param']['iso_min'])}</li>
+  <li><i><font color="blue">isoExp</font></i>&nbsp;=&nbsp;${ float(app.cfg['param']['iso_exp'])}</li>
+  <li>Negate image: &nbsp;${app.cfg['param']['negate']}</li>
+</ul>
+</p>
+
+<p>
+<div class="action" style="padding-bottom:3ex">
+  <form style="float:left" action="${app.base_url}" method="get">
+        <p style="padding:0px;margin:0px">Run again?&nbsp;<input type="submit" value="new input" /></p>
+    </form>
+    <form style="float:left;padding-left:4px" action="${app.base_url + 'params'}" method="get">
+        <p style="margin:0px"><input type="hidden" name="key" value="${app.key}" />
+        <input type="hidden" name="newrun" value="1" />
+        <input type="hidden" name="msg" value="different parameter" />
+        <input type="submit" value="different parameter" /></p>
+    </form>
+</div>
+</p>
+
+
+<hr />
+
+<h2>Result</h2>
+
+
+<p>Notice that if the image height exceeded 600 pixels, then the image is scaled and the results
+ at native resolution are given in the result links.</p>
+
+
+<div class="gallery" style="height:${app.cfg['param']['resultheight']}px">
+    <ul class="index">
+    <li>
+        <a href="${app.work_url + 'src.png'}">
+        Original
+        <span>
+            <img height="${app.cfg['param']['imageheightresized']}" src="${app.work_url + 'src.png'}" alt="" />
+        </span>
+        </a>
+    </li>
+    <li>
+        <a href="${app.work_url + 'seeds.png'}">
+          Seeds
+        <span>
+            <img height="${app.cfg['param']['imageheightresized']}" src="${app.work_url + 'seeds.png'}" alt="" />
+        </span>
+        </a>
+    </li>
+    <li>
+        <a href="${app.work_url + 'cost.png'}">
+          Cost function
+        <span>
+            <img height="${app.cfg['param']['imageheightresized']}" src="${app.work_url + 'cost.png'}" alt="" />
+        </span>
+        </a>
+    </li>
+    <li>
+        <a href="${app.work_url + 'imageFiltered.png'}">
+          Image filtered
+        <span>
+            <img height="${app.cfg['param']['imageheightresized']}" src="${app.work_url + 'imageFiltered.png'}" alt="" />
+        </span>
+        </a>
+    </li>
+    <li>
+        <a href="${app.work_url + 'planarPath.png'}">
+          Planar path
+        <span>
+            <img height="${app.cfg['param']['imageheightresized']}" src="${app.work_url + 'planarPath.png'}" alt="" />
+        </span>
+        </a>
+    </li>
+    <li>
+      <a href="${app.work_url + 'distanceMap.png'}">
+          Distance map
+        <span>
+            <img height="${app.cfg['param']['imageheightresized']}" src="${app.work_url + 'distanceMap.png'}" alt="" />
+        </span>
+        </a>
+    </li>
+
+    <li>
+        <a href="${app.work_url + 'geodes.png'}">
+	 Result
+        <span>
+            <img height="${app.cfg['param']['imageheightresized']}" src="${app.work_url + 'geodes.png'}" alt="" />
+        </span>
+        </a>
+    </li>
+    <li>
+        <a href="${app.work_url + 'geodesSeeds.png'}">
+	 Result and Seeds
+        <span>
+            <img height="${app.cfg['param']['imageheightresized']}" src="${app.work_url + 'geodesSeeds.png'}" alt="" />
+        </span>
+        </a>
+    </li>
+    <li>
+        <a href="${app.work_url + 'radius.png'}">
+	 radius
+        <span>
+            <img height="${app.cfg['param']['imageheightresized']}" src="${app.work_url + 'radius.png'}" alt="" />
+        </span>
+        </a>
+    </li>
+
+    </ul>
+</div>
+
+
+<h2>
+  <a class="toggle" href="#commands" onclick="toggle('commands');">
+    Additional Info
+  </a>
+</h2>
+<div id="commands" style="display:none">
+<p>
+The algorithm ran with the following commands:
+<pre class="stdio"> ${app.list_commands} </pre>
+</p>
+</div>
+
+
+<hr/>
+
+
+
+
+<%include file="archive_info.html" />
+
+<%include file="footer.html" />

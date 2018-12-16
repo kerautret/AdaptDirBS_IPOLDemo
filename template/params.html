@@ -1,0 +1,244 @@
+<%include file="header-jquery.html" />
+
+<script type="text/javascript">
+<%include file="js/createlinkedslider.js" />
+
+function num2sci(value, numDigits)
+{
+    var exponent = Math.floor(Math.log(value) / Math.log(10));
+    var mantissa = value / Math.pow(10, exponent - numDigits);
+   return Math.round(mantissa + (9*exponent - 1)*Math.pow(10, numDigits));
+}
+
+function sci2str(sci, numDigits)
+{
+    var exponent = Math.floor(sci / (9*Math.pow(10, numDigits)));
+    var mantissa = sci/Math.pow(10, numDigits) - (9*exponent - 1);
+    var value = Math.pow(10, exponent) * mantissa;
+    return value.toFixed(numDigits);
+}
+
+// Create a JQueryUI slider linked with text input with scientific notation
+//
+// inputId      the ID of the text input element
+// sliderId     the ID of the DIV element to turn into a slider
+// valueMin     minimum value
+// valueMax     maximum value
+// numDigits    number of digits after decimal point
+function createLinkedSliderExp(inputId, sliderId,
+    valueMin, valueMax, numDigits)
+{
+    var inputObj = $(inputId);
+    // Create JQueryUI slider
+    var sliderObj = $(sliderId).slider({
+        min: num2sci(valueMin, numDigits),         // Minimum value
+        max: num2sci(valueMax, numDigits),         // Maximum value
+        value: num2sci(parseFloat(                 // Initial value
+            inputObj.attr('value')), numDigits),
+        animate: 'fast'});                         // Animation speed
+
+    // Update slider when input changes
+    inputObj.blur(function()
+        {
+            var value = parseFloat(inputObj.attr('value'));
+            var valueClamped;
+
+            if(value <= 0 || !isFinite(value))
+                valueClamped = sliderObj.slider('option', 'min');
+            else
+            {
+                value = num2sci(value, numDigits);
+                valueClamped = Math.min(Math.max(value,
+                    sliderObj.slider('option', 'min')),
+                    sliderObj.slider('option', 'max'));
+            }
+
+            sliderObj.slider('value', valueClamped);
+
+            if(value != valueClamped)
+                inputObj.val(sci2str(valueClamped, numDigits));
+        });
+
+    // Update input when slider changes
+    sliderObj.slider('option', 'slide',
+        function(event, ui) { inputObj.val(sci2str(ui.value, numDigits)); });
+}
+
+
+function spritecoords(s)
+{
+    var n = Math.max(Math.round((parseFloat(s) - 1)/2), 0);
+    return  '0px ' + (-31*n) + 'px';
+}
+// -->
+</script>
+
+
+<form action="${app.base_url + 'editmask'}" method="get">
+<input type="hidden" id="key" name="key" value="${app.key}" />
+
+<p>To apply the segmentation you have first to define the <font color="red">seed</font> and  <font color="red">tip</font>  points and then you can apply the segmentation.
+</p>
+<p>Click on the image to draw the image <font color="red">marker</font> used for segmentation:</p>
+<fieldset>
+  <div class="left" style="text-align: left;">
+    <p><input type="submit" id="action" name="action" value="enter seeds" style="left" /></p>
+  </div>
+  <div class="right" style="text-align: right;">
+    <p><input type="submit" id="action" name="action" value="enter tips" style="right" /></p>
+  </div>
+  
+  <div class="center" style="text-align: center;">
+  <input type="image" style="cursor:crosshair; margin-top:5px;
+    background:url('${app.work_url + 'input_0.png'}')"
+    src="${app.work_url + 'mask.gif'}?${app.timestamp}"
+    width="${app.cfg['param']['viewbox_width']}"
+    height="${app.cfg['param']['viewbox_height']}" alt="" />
+  </div>
+    <p><input type="submit" id="action" name="action" value="undo" style="left" /></p>
+    <p><input type="submit" id="action" name="action" value="clear" style="right; margin-right:3pt" /></p>
+
+</fieldset>
+</form>
+
+<form action="${app.base_url + 'wait'}" method="get">
+<script type="text/javascript">
+  function fillDisk(radius){
+    var canvas = document.getElementById('penpreviewCanvas');
+    var ctx =  canvas.getContext('2d');
+    ctx.fillStyle = '#F00';
+    ctx.strokeStyle = '#000';
+    ctx.beginPath();
+    ctx.clearRect(0,0,31,31);
+    ctx.arc(15, 15, radius, 0, Math.PI*2, false);
+    ctx.fill();
+    ctx.stroke();
+  }
+
+$(document).ready(function()
+{
+    createLinkedSlider('#pensize', '#slider1', 1, 20, 2);
+    createLinkedSlider('#theta', '#slider2', 1, 50, 1);
+    createLinkedSlider('#min_r', '#slider3', 1.0, 20, 0.1);
+    createLinkedSlider('#max_r', '#slider4', 1.0, 20, 0.1);
+    createLinkedSlider('#n_r', '#slider5', 1.0, 20, 1);
+    createLinkedSlider('#iso_min', '#slider6', 0.1, 5, 0.1);
+    createLinkedSlider('#iso_exp', '#slider7', 1, 100, 0.1);
+  
+  fillDisk($('#pensize').attr('value'));
+    // Update pen preview image with pensize slider
+    $('#pensize').blur(function()
+        {
+            var value = $('#pensize').attr('value');
+            var valueClamped = Math.min(Math.max(value,
+                $('#slider1').slider('option', 'min')),
+                $('#slider1').slider('option', 'max'));
+            $('#slider1').slider('value', valueClamped);
+            if(value != valueClamped)
+                $('#pensize').val(Math.round(valueClamped));
+            fillDisk(value);
+ });
+    $('#slider1').slider('option', 'slide',
+        function(event, ui) {
+            $('#pensize').val(Math.round(ui.value));
+            fillDisk($('#pensize').attr('value'));
+        });
+
+});
+</script>
+<input type="hidden" name="key" value="${app.key}" />
+<BR>
+
+<h3>Parameters of the Gabor-like filters</h3>
+<p> You can ajust the Gabor-like filter parameters:
+  <ul>
+    <li>The number of orientations to e use in the filter: </i>  <br>
+      <div style="float:left; width:8em; text-align:right;">
+        <font color="blue"><i>n&theta;</i></font> : &nbsp;&nbsp;<input type="text" style="font-family:monospace; text-align:right;"
+                                                                   size="3" id="theta" name="theta" value="${'%i' % app.cfg['param']['theta']}" />
+      </div>
+      <div id="slider2" style="width:32em; float:left; margin-left:1em; margin-top:4px; font-size:10pt;"></div>
+      <div style="clear:both"> </div>
+    </li>
+    <li> Settings do the radius used in the filter: <br>
+      <ul>
+        <li>The minimal radius to be used:  <br>
+              <div style="float:left; width:8em; text-align:right;">
+                <font color="blue"><i>Rmin</i></font> : &nbsp;&nbsp;<input type="text" style="font-family:monospace; text-align:right;"
+                                                                               size="3" id="min_r" name="min_r" value="${'%f' % app.cfg['param']['min_r']}" />
+              </div>
+              <div id="slider3" style="width:32em; float:left; margin-left:1em; margin-top:4px; font-size:10pt;"></div>
+              <div style="clear:both"> </div>
+              
+        </li>
+        <li>The maximal radius to be used:  <br>
+              <div style="float:left; width:8em; text-align:right;">
+                <font color="blue"><i>Rmax</i></font> : &nbsp;&nbsp;<input type="text" style="font-family:monospace; text-align:right;"
+                                                                               size="3" id="max_r" name="max_r" value="${'%f' % app.cfg['param']['max_r']}" />
+              </div>
+              <div id="slider4" style="width:32em; float:left; margin-left:1em; margin-top:4px; font-size:10pt;"></div>
+              <div style="clear:both"> </div>
+              
+        </li>
+        <li>The number of intermediate radius to be used:  <br>
+              <div style="float:left; width:8em; text-align:right;">
+                <font color="blue"><i>nR</i></font> : &nbsp;&nbsp;<input type="text" style="font-family:monospace; text-align:right;"
+                                                                               size="3" id="n_r" name="n_r" value="${'%i' % app.cfg['param']['n_r']}" />
+              </div>
+              <div id="slider5" style="width:32em; float:left; margin-left:1em; margin-top:4px; font-size:10pt;"></div>
+              <div style="clear:both"> </div>
+              
+        </li>
+      </ul>
+    </li>
+    
+  </ul>
+</p>
+
+
+<h3>Cost function parameters of Cohen and Kimmel model</h3>
+<p>
+  <ul>
+  <li>Parameter isoMin:  <br>
+              <div style="float:left; width:8em; text-align:right;">
+                <font color="blue"><i>isoMin</i></font> : &nbsp;&nbsp;<input type="text" style="font-family:monospace; text-align:right;"
+                                                                               size="3" id="iso_min" name="iso_min" value="${'%f' % app.cfg['param']['iso_min']}" />
+              </div>
+              <div id="slider6" style="width:32em; float:left; margin-left:1em; margin-top:4px; font-size:10pt;"></div>
+              <div style="clear:both"> </div>
+              
+  </li>
+  <li>Parameter isoExp:  <br>
+              <div style="float:left; width:8em; text-align:right;">
+                <font color="blue"><i>isoExp</i></font> : &nbsp;&nbsp;<input type="text" style="font-family:monospace; text-align:right;"
+                                                                               size="3" id="iso_exp" name="iso_exp" value="${'%f' % app.cfg['param']['iso_exp']}" />
+              </div>
+              <div id="slider7" style="width:32em; float:left; margin-left:1em; margin-top:4px; font-size:10pt;"></div>
+              <div style="clear:both"> </div>
+              
+  </li>
+  </ul>
+ 
+
+
+</p>
+
+<p>  Negate the source image (recommanded to extract bright objects on dark background):
+%if 'negate' in app.cfg['param'] and app.cfg['param']['negate']:
+  <input type="checkbox" name="negate" value="on" size="4" /></p>
+%else :
+  <input type="checkbox" name="negate" value="off" size="4" /></p>
+%endif
+
+%if not app.hasAtLeastOneMarker:
+	<font color="red"><b> Warning:</b> to apply the segmentation, you need at least to define one seed and one tip (else two points will be randomly choosen).</font>
+%endif
+
+<p style="clear:both;">Run the algorithm: <input type="submit" name="action" value="run" /><p/>
+  </div>
+
+</form>
+
+<div style="clear:both">&nbsp;</div>
+
+<%include file="footer.html" />
