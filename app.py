@@ -70,8 +70,8 @@ class app(base_app):
         # store common file path in variables
         tgz_file = self.dl_dir + self.demo_src_filename
         prog_names = ["ipolDemo"]
-        script_names =  []
-        prog_bin_files = ["convert.sh"]
+        script_names =  ["convert.sh"]
+        prog_bin_files = []
 
 
 
