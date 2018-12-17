@@ -74,7 +74,6 @@ class app(base_app):
         prog_bin_files = []
 
 
-
         
         for f in prog_names:
             prog_bin_files.append(self.bin_dir+ f)
@@ -368,8 +367,6 @@ class app(base_app):
         this one needs no parameter
         """
         
-
-        
         # # Get image size
         size = image(self.work_dir + 'input_0.png').size
         ##  -------
@@ -391,6 +388,17 @@ class app(base_app):
         cmd = self.runCommand(command_args, None, f)
         f.close()
 
+        ##  -------
+        ## process 2 bis: apply the line detection algorithm
+        ## ---------
+        
+        command_args = ['displaySegments.sh'] + \
+                       [ 'inputNG.pgm',  "outputContours.txt", 'resultLines',]
+
+        f = open(self.work_dir+"algoLogBis.txt", "a")
+        cmd = self.runCommand(command_args, None, f)
+        f.close()
+
 
         ## ---------
         ## process 3: converting to output result
@@ -398,7 +406,7 @@ class app(base_app):
         widthDisplay = max(inputWidth, 512)
         fInfo = open(self.work_dir+"algoLog.txt", "a")
         command_args = ['convert.sh', '-background', '#FFFFFF', '-flatten', \
-                        self.work_dir +'res_contours.eps', '-geometry', str(widthDisplay)+"x", 'res_contours.png']
+                        self.work_dir +'resultLines.eps', '-geometry', str(widthDisplay)+"x", 'resultLines.png']
         self.runCommand(command_args, None, fInfo)
 
 
