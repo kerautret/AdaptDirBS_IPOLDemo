@@ -71,7 +71,7 @@ class app(base_app):
         tgz_file = self.dl_dir + self.demo_src_filename
         prog_names = ["ipolDemo"]
         script_names =  []
-        prog_bin_files = []
+        prog_bin_files = ["convert.sh"]
 
 
 
@@ -103,10 +103,10 @@ class app(base_app):
                 shutil.copy(self.src_dir + os.path.join("Seg/IPOLdemo", \
                             prog_names[i]), prog_bin_files[i])
 
-            #for f in script_names :
-            #    shutil.copy(self.src_dir + os.path.join("SrcCodeHFM/ScriptsDemoIPOL/", f), \
-            #                self.bin_dir)
-            #build.run("cd %s;/usr/local/bin/virtualenv -p /usr/bin/python2.7 envDemo; ./installEnv.sh" %(self.bin_dir),stdout=log_file)
+            for f in script_names :
+                shutil.copy(self.src_dir + os.path.join("Seg/IPOLdemo/Scripts", f), \
+                            self.bin_dir)
+            
             # cleanup the source dir
             shutil.rmtree(self.src_dir)
 
