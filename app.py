@@ -70,7 +70,7 @@ class app(base_app):
         # store common file path in variables
         tgz_file = self.dl_dir + self.demo_src_filename
         prog_names = ["ipolDemo"]
-        script_names =  ["convert.sh"]
+        script_names =  ["convert.sh", "displaySegments.sh"]
         prog_bin_files = []
 
 
@@ -372,23 +372,36 @@ class app(base_app):
         
         # # Get image size
         size = image(self.work_dir + 'input_0.png').size
+        ##  -------
+        ## process 1: transform input file
+        ## ---------
+        command_args = ['convert.sh', 'input_0.png', 'inputNG.pgm' ]
+        self.runCommand(command_args)
 
-        # ##  -------
-        # ## process 1: transform input file
-        # ## ---------
-        command_args = ['runDemoHFM_IPOL.sh', self.work_dir+'input_0.png', self.work_dir+'output_0.pgm', self.work_dir+'/seeds.dat', self.work_dir+'/tips.dat' ]
-        command_args += [str(self.cfg['param']['theta'])]
-        command_args += [str(self.cfg['param']['max_r'])]
-        command_args += [str(self.cfg['param']['min_r'])]
-        command_args += [str(self.cfg['param']['n_r'])]
-        command_args += [str(self.cfg['param']['iso_min'])]
-        command_args += [str(self.cfg['param']['iso_exp'])]
+        ##  -------
+        ## process 2: apply the line detection algorithm
+        ## ---------
 
-        if self.cfg['param']['negate']:
-             command_args += ['negate']
-        else:
-             command_args += ['normal']
-        
+        inputWidth = image(self.work_dir + 'input_0.png').size[0]
+        inputHeight = image(self.work_dir + 'input_0.png').size[1]
+        command_args = ['ipolDemo'] + \
+                       [ 'inputNG.pgm',  "outputContours.txt"]
+
+        f = open(self.work_dir+"algoLog.txt", "a")
+        cmd = self.runCommand(command_args, None, f)
+        f.close()
+
+
+        ## ---------
+        ## process 3: converting to output result
+        ## ---------
+        widthDisplay = max(inputWidth, 512)
+        fInfo = open(self.work_dir+"algoLog.txt", "a")
+        command_args = ['convert.sh', '-background', '#FFFFFF', '-flatten', \
+                        self.work_dir +'res_contours.eps', '-geometry', str(widthDisplay)+"x", 'res_contours.png']
+        self.runCommand(command_args, None, fInfo)
+
+
         self.runCommand(command_args,stdOut=stdout, stdErr=stdout)
 
         # command_args = ['convert.sh', 'mask.png', 'mask.pgm' ]
