@@ -410,7 +410,7 @@ class app(base_app):
         self.runCommand(command_args, None, fInfo)
 
 
-        self.runCommand(command_args,stdOut=stdout, stdErr=stdout)
+        #self.runCommand(command_args,stdOut=stdout, stdErr=stdout)
 
         # command_args = ['convert.sh', 'mask.png', 'mask.pgm' ]
         # self.runCommand(command_args)
