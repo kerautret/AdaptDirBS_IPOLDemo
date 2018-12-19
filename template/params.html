@@ -149,10 +149,10 @@ $(document).ready(function()
 <input type="hidden" name="key" value="${app.key}" />
 <BR>
 
-<h3>Parameters of the Gabor-like filters</h3>
-<p> You can ajust the Gabor-like filter parameters:
+<h3>Parameters </h3>
+<p> You can ajust the following parameters:
   <ul>
-    <li>The number of orientations to e use in the filter: </i>  <br>
+    <li>The width of the blurred segment used in the detection: </i>  <br>
       <div style="float:left; width:8em; text-align:right;">
         <font color="blue"><i>n&theta;</i></font> : &nbsp;&nbsp;<input type="text" style="font-family:monospace; text-align:right;"
                                                                    size="3" id="theta" name="theta" value="${'%i' % app.cfg['param']['theta']}" />
@@ -160,68 +160,10 @@ $(document).ready(function()
       <div id="slider2" style="width:32em; float:left; margin-left:1em; margin-top:4px; font-size:10pt;"></div>
       <div style="clear:both"> </div>
     </li>
-    <li> Settings do the radius used in the filter: <br>
-      <ul>
-        <li>The minimal radius to be used:  <br>
-              <div style="float:left; width:8em; text-align:right;">
-                <font color="blue"><i>Rmin</i></font> : &nbsp;&nbsp;<input type="text" style="font-family:monospace; text-align:right;"
-                                                                               size="3" id="min_r" name="min_r" value="${'%f' % app.cfg['param']['min_r']}" />
-              </div>
-              <div id="slider3" style="width:32em; float:left; margin-left:1em; margin-top:4px; font-size:10pt;"></div>
-              <div style="clear:both"> </div>
-              
-        </li>
-        <li>The maximal radius to be used:  <br>
-              <div style="float:left; width:8em; text-align:right;">
-                <font color="blue"><i>Rmax</i></font> : &nbsp;&nbsp;<input type="text" style="font-family:monospace; text-align:right;"
-                                                                               size="3" id="max_r" name="max_r" value="${'%f' % app.cfg['param']['max_r']}" />
-              </div>
-              <div id="slider4" style="width:32em; float:left; margin-left:1em; margin-top:4px; font-size:10pt;"></div>
-              <div style="clear:both"> </div>
-              
-        </li>
-        <li>The number of intermediate radius to be used:  <br>
-              <div style="float:left; width:8em; text-align:right;">
-                <font color="blue"><i>nR</i></font> : &nbsp;&nbsp;<input type="text" style="font-family:monospace; text-align:right;"
-                                                                               size="3" id="n_r" name="n_r" value="${'%i' % app.cfg['param']['n_r']}" />
-              </div>
-              <div id="slider5" style="width:32em; float:left; margin-left:1em; margin-top:4px; font-size:10pt;"></div>
-              <div style="clear:both"> </div>
-              
-        </li>
-      </ul>
-    </li>
     
   </ul>
 </p>
 
-
-<h3>Cost function parameters of Cohen and Kimmel model</h3>
-<p>
-  <ul>
-  <li>Parameter isoMin:  <br>
-              <div style="float:left; width:8em; text-align:right;">
-                <font color="blue"><i>isoMin</i></font> : &nbsp;&nbsp;<input type="text" style="font-family:monospace; text-align:right;"
-                                                                               size="3" id="iso_min" name="iso_min" value="${'%f' % app.cfg['param']['iso_min']}" />
-              </div>
-              <div id="slider6" style="width:32em; float:left; margin-left:1em; margin-top:4px; font-size:10pt;"></div>
-              <div style="clear:both"> </div>
-              
-  </li>
-  <li>Parameter isoExp:  <br>
-              <div style="float:left; width:8em; text-align:right;">
-                <font color="blue"><i>isoExp</i></font> : &nbsp;&nbsp;<input type="text" style="font-family:monospace; text-align:right;"
-                                                                               size="3" id="iso_exp" name="iso_exp" value="${'%f' % app.cfg['param']['iso_exp']}" />
-              </div>
-              <div id="slider7" style="width:32em; float:left; margin-left:1em; margin-top:4px; font-size:10pt;"></div>
-              <div style="clear:both"> </div>
-              
-  </li>
-  </ul>
- 
-
-
-</p>
 
 <p>  Negate the source image (recommanded to extract bright objects on dark background):
 %if 'negate' in app.cfg['param'] and app.cfg['param']['negate']:
@@ -231,7 +173,7 @@ $(document).ready(function()
 %endif
 
 %if not app.hasAtLeastOneMarker:
-	<font color="red"><b> Warning:</b> to apply the segmentation, you need at least to define one seed and one tip (else two points will be randomly choosen).</font>
+	<font color="red"><b> Warning:</b> to apply the detection on specific area, you need at least to define one seed segment with a pair of two points .</font>
 %endif
 
 <p style="clear:both;">Run the algorithm: <input type="submit" name="action" value="run" /><p/>
