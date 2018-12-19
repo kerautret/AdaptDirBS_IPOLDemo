@@ -360,7 +360,7 @@ class app(base_app):
         ##  -------
         ## process 1: transform input file
         ## ---------
-        command_args = ['convert.sh', 'input_0.png', 'inputNG.pgm', self.cfg['param']['width'] ]
+        command_args = ['convert.sh', 'input_0.png', 'inputNG.pgm', int(self.cfg['param']['width'])]
         self.runCommand(command_args)
 
         ##  -------
