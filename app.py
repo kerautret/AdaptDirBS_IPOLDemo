@@ -370,7 +370,7 @@ class app(base_app):
         inputWidth = image(self.work_dir + 'input_0.png').size[0]
         inputHeight = image(self.work_dir + 'input_0.png').size[1]
         command_args = ['ipolDemo'] + \
-                       [ 'inputNG.pgm',  "outputContours.txt",  str(self.cfg['param']['width'])]
+                       [ 'inputNG.pgm',  "outputContours.txt"]
 
         f = open(self.work_dir+"algoLog.txt", "a")
         cmd = self.runCommand(command_args, None, f)
