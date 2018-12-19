@@ -154,7 +154,7 @@ class app(base_app):
                draw.ellipse((x - self.pensize, y - self.pensize, x + self.pensize + 1, y + self.pensize + 1), fill=254)
                outTips.write(str(x)+","+str(y)+",")
             if i % 2 == 1  :
-                draw.line((lastx, lasty, x, y), fill=128)
+                draw.line((lastx, lasty, x, y), fill=254)
             i = i + 1
             lastx = x
             lasty = y
