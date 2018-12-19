@@ -30,12 +30,7 @@ class app(base_app):
     input_dtype = '3x8i'                # input image expected data type
     input_ext = '.png'                  # expected extension
     is_test = True       # switch to False for deployment
-    default_param = {'theta': 30,  # default parameters
-                     'min_r': 1.2,
-                     'max_r': 5.0,
-                     'n_r': 5.0,
-                     'iso_min': 0.1,
-                     'iso_exp': 50,
+    default_param = {'width': 3,  # default parameters
                      'pensize': pensize,
                      'pencolor':'red'}
     pencolors = {'red'   : [255, 0, 0],'green'   : [0, 255, 0]}
