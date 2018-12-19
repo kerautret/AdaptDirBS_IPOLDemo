@@ -77,19 +77,6 @@ function spritecoords(s)
 <form action="${app.base_url + 'editmask'}" method="get">
 <input type="hidden" id="key" name="key" value="${app.key}" />
 
-<h3>Parameters </h3>
-<p>To apply the segment detection you can adjust the following parameters:
-  <ul>
-    <li>The width of the blurred segment used in the detection: </i>  <br>
-      <div style="float:left; width:8em; text-align:right;">
-        <font color="blue"><i>width</i></font> : &nbsp;<input type="text" style="font-family:monospace; text-align:right;"
-                                                                   size="3" id="width" name="width" value="${'%i' % app.cfg['param']['width']}" />
-      </div>
-      <div id="slider2" style="width:32em; float:left; margin-left:1em; margin-top:4px; font-size:10pt;"></div>
-      <div style="clear:both"> </div>
-    </li>
-  </ul>
-</p>
 
 
 <p>Option: click on the image to define the  <font color="red"> seed segments </font> used to apply the detection on specific direction:</p>
@@ -158,6 +145,19 @@ $(document).ready(function()
 <BR>
 
  
+<h3>Parameters </h3>
+<p>To apply the segment detection you can adjust the following parameters:
+  <ul>
+    <li>The width of the blurred segment used in the detection: </i>  <br>
+      <div style="float:left; width:8em; text-align:right;">
+        <font color="blue"><i>width</i></font> : &nbsp;<input type="text" style="font-family:monospace; text-align:right;"
+                                                                   size="3" id="width" name="width" value="${'%i' % app.cfg['param']['width']}" />
+      </div>
+      <div id="slider2" style="width:32em; float:left; margin-left:1em; margin-top:4px; font-size:10pt;"></div>
+      <div style="clear:both"> </div>
+    </li>
+  </ul>
+</p>
 
 <p style="clear:both;">Run the algorithm: <input type="submit" name="action" value="run" /><p/>
   </div>
