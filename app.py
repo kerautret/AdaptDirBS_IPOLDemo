@@ -153,7 +153,7 @@ class app(base_app):
             if t == 'tips' :
                draw.ellipse((x - self.pensize, y - self.pensize, x + self.pensize + 1, y + self.pensize + 1), fill=254)
                outTips.write(str(x)+","+str(y)+",")
-            if i % 2 == 0 && i != 0 :
+            if i % 2 == 0 and i != 0 :
                 draw.line(lastx, lasty, x, y, fill=128)
             i = i + 1
             lastx = x
