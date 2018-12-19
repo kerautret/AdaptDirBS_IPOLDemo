@@ -347,14 +347,7 @@ class app(base_app):
             ar.add_file("radius.png",
                 info="radius")
 #            ar.add_file("commands.txt", info="commands")
-            ar.add_info({"theta":  int(self.cfg['param']['theta'])})
-            ar.add_info({"Rmin":  int(self.cfg['param']['min_r'])})
-            ar.add_info({"Rmax":  int(self.cfg['param']['max_r'])})
-            ar.add_info({"nR":  int(self.cfg['param']['n_r'])})
-            ar.add_info({"isoMin":  int(self.cfg['param']['iso_min'])})
-            ar.add_info({"isoExp":  int(self.cfg['param']['iso_exp'])})
-
-            ar.add_info({"negate image": self.cfg['param']['negate']})
+            ar.add_info({"width":  int(self.cfg['param']['width'])})
             ar.save()
 
         return self.tmpl_out("run.html")

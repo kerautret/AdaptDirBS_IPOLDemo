@@ -77,9 +77,22 @@ function spritecoords(s)
 <form action="${app.base_url + 'editmask'}" method="get">
 <input type="hidden" id="key" name="key" value="${app.key}" />
 
-<p>To apply the segmentation you have first to define the <font color="red">seed</font> and  <font color="red">tip</font>  points and then you can apply the segmentation.
+<h3>Parameters </h3>
+<p>To apply the segment detection you can adjust the following parameters:
+  <ul>
+    <li>The width of the blurred segment used in the detection: </i>  <br>
+      <div style="float:left; width:8em; text-align:right;">
+        <font color="blue"><i>width;</i></font> : &nbsp;&nbsp;<input type="text" style="font-family:monospace; text-align:right;"
+                                                                   size="3" id="width" name="width" value="${'%i' % app.cfg['param']['theta']}" />
+      </div>
+      <div id="slider2" style="width:32em; float:left; margin-left:1em; margin-top:4px; font-size:10pt;"></div>
+      <div style="clear:both"> </div>
+    </li>
+  </ul>
 </p>
-<p>Click on the image to draw the image <font color="red">marker</font> used for segmentation:</p>
+
+
+<p>Option: click on the image to define the  <font color="red"> seed segments </font> used to apply the detection on specific direction:</p>
 <fieldset>
   <div class="left" style="text-align: left;">
     <p><input type="submit" id="action" name="action" value="enter seeds" style="left" /></p>
@@ -118,12 +131,7 @@ function spritecoords(s)
 $(document).ready(function()
 {
     createLinkedSlider('#pensize', '#slider1', 1, 20, 2);
-    createLinkedSlider('#theta', '#slider2', 1, 50, 1);
-    createLinkedSlider('#min_r', '#slider3', 1.0, 20, 0.1);
-    createLinkedSlider('#max_r', '#slider4', 1.0, 20, 0.1);
-    createLinkedSlider('#n_r', '#slider5', 1.0, 20, 1);
-    createLinkedSlider('#iso_min', '#slider6', 0.1, 5, 0.1);
-    createLinkedSlider('#iso_exp', '#slider7', 1, 100, 0.1);
+    createLinkedSlider('#width', '#slider2', 1, 50, 1);
   
   fillDisk($('#pensize').attr('value'));
     // Update pen preview image with pensize slider
@@ -149,32 +157,7 @@ $(document).ready(function()
 <input type="hidden" name="key" value="${app.key}" />
 <BR>
 
-<h3>Parameters </h3>
-<p> You can ajust the following parameters:
-  <ul>
-    <li>The width of the blurred segment used in the detection: </i>  <br>
-      <div style="float:left; width:8em; text-align:right;">
-        <font color="blue"><i>n&theta;</i></font> : &nbsp;&nbsp;<input type="text" style="font-family:monospace; text-align:right;"
-                                                                   size="3" id="theta" name="theta" value="${'%i' % app.cfg['param']['theta']}" />
-      </div>
-      <div id="slider2" style="width:32em; float:left; margin-left:1em; margin-top:4px; font-size:10pt;"></div>
-      <div style="clear:both"> </div>
-    </li>
-    
-  </ul>
-</p>
-
-
-<p>  Negate the source image (recommanded to extract bright objects on dark background):
-%if 'negate' in app.cfg['param'] and app.cfg['param']['negate']:
-  <input type="checkbox" name="negate" value="on" size="4" /></p>
-%else :
-  <input type="checkbox" name="negate" value="off" size="4" /></p>
-%endif
-
-%if not app.hasAtLeastOneMarker:
-	<font color="blue"><b> Note:</b> to apply the detection on specific areas, you can  define some seed segments with some pair of points.</font>
-%endif
+ 
 
 <p style="clear:both;">Run the algorithm: <input type="submit" name="action" value="run" /><p/>
   </div>
