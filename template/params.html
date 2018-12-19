@@ -80,14 +80,7 @@ function spritecoords(s)
 
 
 <p>Option: click on the image to define the  <font color="red"> seed segments </font> used to apply the detection on specific direction:</p>
-<fieldset>
-  <div class="left" style="text-align: left;">
-    <p><input type="submit" id="action" name="action" value="enter seeds" style="left" /></p>
-  </div>
-  <div class="right" style="text-align: right;">
-    <p><input type="submit" id="action" name="action" value="enter tips" style="right" /></p>
-  </div>
-  
+<fieldset>  
   <div class="center" style="text-align: center;">
   <input type="image" style="cursor:crosshair; margin-top:5px;
     background:url('${app.work_url + 'input_0.png'}')"
@@ -118,7 +111,7 @@ function spritecoords(s)
 $(document).ready(function()
 {
     createLinkedSlider('#pensize', '#slider1', 1, 20, 2);
-    createLinkedSlider('#width', '#slider2', 1, 50, 1);
+    createLinkedSlider('#width', '#slider2', 1, 10, 1);
   
   fillDisk($('#pensize').attr('value'));
     // Update pen preview image with pensize slider
