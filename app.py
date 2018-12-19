@@ -71,7 +71,7 @@ class app(base_app):
         tgz_file = self.dl_dir + self.demo_src_filename
         prog_names = ["ipolDemo"]
         script_names =  ["convert.sh", "displaySegments.sh"]
-        prog_bin_files = ["ipolDemo"]
+        prog_bin_files = []
 
 
         
