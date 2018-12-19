@@ -143,7 +143,9 @@ class app(base_app):
 
         outSeeds = open(self.work_dir + 'seeds.dat', 'w')
         outTips = open(self.work_dir + 'tips.dat', 'w')
-        
+        i = 0
+        lastx = 0
+        lasty = 0
         for (t, x, y) in commandlist:
             if t == 'seeds' :
                draw.ellipse((x - self.pensize, y - self.pensize, x + self.pensize + 1, y + self.pensize + 1), fill=255)
@@ -151,6 +153,11 @@ class app(base_app):
             if t == 'tips' :
                draw.ellipse((x - self.pensize, y - self.pensize, x + self.pensize + 1, y + self.pensize + 1), fill=254)
                outTips.write(str(x)+","+str(y)+",")
+            if i % 2 == 0 && i != 0 :
+                draw.line(lastx, lasty, x, y)
+            i = i + 1
+            lastx = x
+            lasty = y
         outSeeds.close()
         outTips.close()
         mask.putpalette([128, 128, 128] + [0, 0, 0]*253
