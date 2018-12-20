@@ -144,7 +144,7 @@ class app(base_app):
 
         outSeeds = open(self.work_dir + 'seeds.dat', 'w')
         outTips = open(self.work_dir + 'tips.dat', 'w')
-        sizeSeeds = 0
+        self.sizeSeeds = 0
         lastx = 0
         lasty = 0
         for (t, x, y) in commandlist:
@@ -156,7 +156,7 @@ class app(base_app):
                outTips.write(str(x)+","+str(y)+",")
             if sizeSeeds % 2 == 1  :
                 draw.line((lastx, lasty, x, y), fill=254)
-            sizeSeeds = sizeSeeds + 1
+            self.sizeSeeds = self.sizeSeeds + 1
             lastx = x
             lasty = y
         outSeeds.close()
