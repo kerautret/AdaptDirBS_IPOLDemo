@@ -143,6 +143,7 @@ class app(base_app):
 
         outSeeds = open(self.work_dir + 'seeds.dat', 'w')
         outTips = open(self.work_dir + 'tips.dat', 'w')
+        self.cfg['param']['sizeSeeds'] = 0
         sizeSeeds = 0
         lastx = 0
         lasty = 0
