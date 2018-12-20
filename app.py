@@ -159,6 +159,7 @@ class app(base_app):
             self.sizeSeeds = self.sizeSeeds + 1
             lastx = x
             lasty = y
+        outSeeds.write(" -1")
         outSeeds.close()
         outTips.close()
         mask.putpalette([128, 128, 128] + [0, 0, 0]*253
