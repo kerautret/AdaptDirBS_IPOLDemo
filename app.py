@@ -143,7 +143,6 @@ class app(base_app):
 
         outSeeds = open(self.work_dir + 'seeds.dat', 'w')
         outTips = open(self.work_dir + 'tips.dat', 'w')
-        self.cfg['param']['sizeSeeds'] = 0
         sizeSeeds = 0
         lastx = 0
         lasty = 0
@@ -164,7 +163,7 @@ class app(base_app):
         mask.putpalette([128, 128, 128] + [0, 0, 0]*253
                         + self.pencolors['red']+self.pencolors['green'])       
         mask.save(self.work_dir + 'mask.gif', transparency=0)
-        self.cfg['param']['sizeSeeds'] = sizeSeeds
+
       
 
 
@@ -377,10 +376,9 @@ class app(base_app):
 
         inputWidth = image(self.work_dir + 'input_0.png').size[0]
         inputHeight = image(self.work_dir + 'input_0.png').size[1]
-        if self.cfg['param']['sizeSeeds'] == 0 :            
+        if self.sizeSeeds == 0 :            
             command_args = ['ipolDemo'] + \
                            [ 'inputNG.pgm',  "outputContours.txt"]
-
         else :
             command_args = ['ipolDemo'] + \
                            [ 'inputNG.pgm',  "outputContours.txt", "seeds.dat"]
