@@ -143,7 +143,7 @@ class app(base_app):
 
         outSeeds = open(self.work_dir + 'seeds.dat', 'w')
         outTips = open(self.work_dir + 'tips.dat', 'w')
-        i = 0
+        sizeSeeds = 0
         lastx = 0
         lasty = 0
         for (t, x, y) in commandlist:
@@ -153,9 +153,9 @@ class app(base_app):
             if t == 'tips' :
                draw.ellipse((x - self.pensize, y - self.pensize, x + self.pensize + 1, y + self.pensize + 1), fill=254)
                outTips.write(str(x)+","+str(y)+",")
-            if i % 2 == 1  :
+            if sizeSeeds % 2 == 1  :
                 draw.line((lastx, lasty, x, y), fill=254)
-            i = i + 1
+            sizeSeeds = sizeSeeds + 1
             lastx = x
             lasty = y
         outSeeds.close()
@@ -163,7 +163,7 @@ class app(base_app):
         mask.putpalette([128, 128, 128] + [0, 0, 0]*253
                         + self.pencolors['red']+self.pencolors['green'])       
         mask.save(self.work_dir + 'mask.gif', transparency=0)
-
+        self.cfg['param']['sizeSeeds'] = sizeSeeds
       
 
 
@@ -376,13 +376,20 @@ class app(base_app):
 
         inputWidth = image(self.work_dir + 'input_0.png').size[0]
         inputHeight = image(self.work_dir + 'input_0.png').size[1]
-        command_args = ['ipolDemo'] + \
-                       [ 'inputNG.pgm',  "outputContours.txt"]
+        if self.cfg['param']['sizeSeeds'] == 0 :            
+            command_args = ['ipolDemo'] + \
+                           [ 'inputNG.pgm',  "outputContours.txt"]
 
+        else :
+            command_args = ['ipolDemo'] + \
+                           [ 'inputNG.pgm',  "outputContours.txt", "seeds.dat"]
+        
+        
+        
         f = open(self.work_dir+"algoLog.txt", "a")
         cmd = self.runCommand(command_args, None, f)
         f.close()
-
+        
         ##  -------
         ## process 2 bis: apply the line detection algorithm
         ## ---------
