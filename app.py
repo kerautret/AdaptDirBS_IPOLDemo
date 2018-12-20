@@ -154,7 +154,7 @@ class app(base_app):
             if t == 'tips' :
                draw.ellipse((x - self.pensize, y - self.pensize, x + self.pensize + 1, y + self.pensize + 1), fill=254)
                outTips.write(str(x)+","+str(y)+",")
-            if sizeSeeds % 2 == 1  :
+            if self.sizeSeeds % 2 == 1  :
                 draw.line((lastx, lasty, x, y), fill=254)
             self.sizeSeeds = self.sizeSeeds + 1
             lastx = x
