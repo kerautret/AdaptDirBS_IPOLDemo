@@ -37,6 +37,7 @@ class app(base_app):
     list_commands = ""
     hasAtLeastOneMarker = False
     mode_select_marker = 'seeds'
+    sizeSeeds = 0
     
     def __init__(self):
         """
