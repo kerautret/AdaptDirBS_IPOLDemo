@@ -66,7 +66,7 @@ class app(base_app):
         # store common file path in variables
         tgz_file = self.dl_dir + self.demo_src_filename
         prog_names = ["ipolDemo"]
-        script_names =  ["convert.sh", "displaySegments.sh"]
+        script_names =  ["convert.sh", "displaySegments.sh", "displaySegmentsInteract.sh"]
         prog_bin_files = []
 
 
