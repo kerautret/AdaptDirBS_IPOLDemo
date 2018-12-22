@@ -385,7 +385,7 @@ class app(base_app):
                            [ 'inputNG.pgm',  "outputContours.txt"]
         else :
             command_args = ['ipolDemo'] + \
-                           [ 'inputNG.ppm',  "outputContours.txt", "seeds.dat"]
+                           [ 'inputNG.pgm',  "outputContours.txt", "seeds.dat"]
         
         
         
@@ -401,7 +401,7 @@ class app(base_app):
                            [ 'inputNG.pgm',  "outputContours.txt", 'resultLines']
         else:
             command_args = ['displaySegmentsInteract.sh'] + \
-                           [ 'inputNG.pgm',  "outputContours.txt", "seeds.dat", 'resultLines']
+                           [ 'input.ppm',  "outputContours.txt", "seeds.dat", 'resultLines']
             
         f = open(self.work_dir+"algoLogBis.txt", "a")
         cmd = self.runCommand(command_args, None, f)
