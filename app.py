@@ -385,7 +385,7 @@ class app(base_app):
                            [ 'inputNG.pgm',  "outputContours.txt"]
         else :
             command_args = ['ipolDemo'] + \
-                           [ 'inputNG.ppm',  "outputContours.txt", "seeds.dat"]
+                           [ 'inputNG.pgm',  "outputContours.txt", "seeds.dat"]
         
         
         
