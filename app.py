@@ -382,10 +382,10 @@ class app(base_app):
         inputHeight = image(self.work_dir + 'input_0.png').size[1]
         if self.sizeSeeds == 0 :            
             command_args = ['ipolDemo'] + \
-                           [ 'inputNG.pgm',  "outputContours.txt"]
+                           [ 'inputNG.ppm',  "outputContours.txt"]
         else :
             command_args = ['ipolDemo'] + \
-                           [ 'inputNG.pgm',  "outputContours.txt", "seeds.dat"]
+                           [ 'inputNG.ppm',  "outputContours.txt", "seeds.dat"]
         
         
         
@@ -398,7 +398,7 @@ class app(base_app):
         ## ---------
         if self.sizeSeeds == 0 : 
             command_args = ['displaySegments.sh'] + \
-                           [ 'inputNG.pgm',  "outputContours.txt", 'resultLines']
+                           [ 'input.ppm',  "outputContours.txt", 'resultLines']
         else:
             command_args = ['displaySegmentsInteract.sh'] + \
                            [ 'input.ppm',  "outputContours.txt", "seeds.dat", 'resultLines']
