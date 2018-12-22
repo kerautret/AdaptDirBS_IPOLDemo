@@ -150,10 +150,10 @@ class app(base_app):
         for (t, x, y) in commandlist:
             if t == 'seeds' :
                draw.ellipse((x - self.pensize, y - self.pensize, x + self.pensize + 1, y + self.pensize + 1), fill=255)
-               outSeeds.write(str(x)+" "+str(y)+" ")
+               outSeeds.write(str(x)+" "+str(size[1]-y)+" ")
             if t == 'tips' :
                draw.ellipse((x - self.pensize, y - self.pensize, x + self.pensize + 1, y + self.pensize + 1), fill=254)
-               outTips.write(str(x)+","+str(y)+",")
+               outTips.write(str(x)+","+str(size[1]-y)+",")
             if self.sizeSeeds % 2 == 1  :
                 draw.line((lastx, lasty, x, y), fill=254)
                 outSeeds.write("\n")
