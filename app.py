@@ -371,6 +371,8 @@ class app(base_app):
         ## ---------
         command_args = ['convert.sh', 'input_0.png', 'inputNG.pgm']
         self.runCommand(command_args)
+        command_args = ['convert.sh', 'input_0.png', 'input.ppm']
+        self.runCommand(command_args)
 
         ##  -------
         ## process 2: apply the line detection algorithm
@@ -383,7 +385,7 @@ class app(base_app):
                            [ 'inputNG.pgm',  "outputContours.txt"]
         else :
             command_args = ['ipolDemo'] + \
-                           [ 'inputNG.pgm',  "outputContours.txt", "seeds.dat"]
+                           [ 'inputNG.ppm',  "outputContours.txt", "seeds.dat"]
         
         
         
