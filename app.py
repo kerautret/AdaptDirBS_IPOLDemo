@@ -397,7 +397,7 @@ class app(base_app):
             command_args = ['displaySegments.sh'] + \
                            [ 'inputNG.pgm',  "outputContours.txt", 'resultLines']
         else:
-            command_args = ['displaySegments.sh'] + \
+            command_args = ['displaySegmentsInteract.sh'] + \
                            [ 'inputNG.pgm',  "outputContours.txt", "seeds.dat", 'resultLines']
             
         f = open(self.work_dir+"algoLogBis.txt", "a")
