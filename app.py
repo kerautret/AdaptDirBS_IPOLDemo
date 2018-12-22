@@ -394,10 +394,13 @@ class app(base_app):
         ##  -------
         ## process 2 bis: apply the line detection algorithm
         ## ---------
-        
-        command_args = ['displaySegments.sh'] + \
-                       [ 'inputNG.pgm',  "outputContours.txt", 'resultLines',]
-
+        if self.sizeSeeds == 0 : 
+            command_args = ['displaySegments.sh'] + \
+                           [ 'inputNG.pgm',  "outputContours.txt", 'resultLines']
+        else:
+            command_args = ['displaySegments.sh'] + \
+                           [ 'inputNG.pgm',  "outputContours.txt", "seeds.dat", 'resultLines']
+            
         f = open(self.work_dir+"algoLogBis.txt", "a")
         cmd = self.runCommand(command_args, None, f)
         f.close()
