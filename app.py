@@ -371,7 +371,7 @@ class app(base_app):
         ## ---------
         command_args = ['convert.sh', 'input_0.png', 'inputNG.pgm']
         self.runCommand(command_args)
-        command_args = ['convert.sh', 'input_0.png', 'input.ppm']
+        command_args = ['convert.sh', 'input_0.pgm', 'input.ppm']
         self.runCommand(command_args)
 
         ##  -------
