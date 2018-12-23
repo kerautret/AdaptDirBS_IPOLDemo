@@ -382,10 +382,10 @@ class app(base_app):
         inputHeight = image(self.work_dir + 'input_0.png').size[1]
         if self.sizeSeeds == 0 :            
             command_args = ['ipolDemo'] + \
-                           [ 'inputNG.pgm',  "outputContours.txt",  self.cfg['param']['width'] ]
+                           [ 'inputNG.pgm',  "outputContours.txt",  str(self.cfg['param']['width']) ]
         else :
             command_args = ['ipolDemo'] + \
-                           [ 'inputNG.pgm',  "outputContours.txt",  self.cfg['param']['width'], "seeds.dat"]
+                           [ 'inputNG.pgm',  "outputContours.txt",  str(self.cfg['param']['width']), "seeds.dat"]
         
         
         
