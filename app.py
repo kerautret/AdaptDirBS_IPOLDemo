@@ -329,7 +329,7 @@ class app(base_app):
         # Run the algorithm
         stdout = open(self.work_dir + 'stdout.txt', 'w')
         self.list_commands = ""
-        #self.sizeSeeds = self.getSeedsSize()
+        self.sizeSeeds = self.getSeedsSize()
         try:
             run_time = time.time()
             self.run_algo(stdout=stdout)
