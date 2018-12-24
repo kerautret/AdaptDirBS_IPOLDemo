@@ -346,22 +346,10 @@ class app(base_app):
         # Archive
         if self.cfg['meta']['original']:
             ar = self.make_archive()
-            ar.add_file("src.png",
+            ar.add_file("input_0.png",
                 info="original image")
-            ar.add_file("cost.png",
-                info="cost function")
-            ar.add_file("imageFiltered.png",
-                info="image Filtered")
-            ar.add_file("geodes.png",
-                info="geodesic result")
-            ar.add_file("distanceMap.png",
-                info="distance map")
-            ar.add_file("planarPath.png",
-                info="planar path")
-            ar.add_file("seeds.png",
-                info="seeds")
-            ar.add_file("radius.png",
-                info="radius")
+            ar.add_file("resultLines.png",
+                info="result lines")
 #            ar.add_file("commands.txt", info="commands")
             ar.add_info({"width":  int(self.cfg['param']['width'])})
             ar.save()
