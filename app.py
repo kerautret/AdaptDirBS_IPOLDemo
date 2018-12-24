@@ -61,9 +61,9 @@ class app(base_app):
 
 
     def getSeedsSize(self):
-        commandlist = self.readcommandlist()
+        list = self.readcommandlist()
         nb = 0 
-        for (t, x, y) in commandlist:
+        for (t, x, y) in list:
             if t == 'seeds' :
                 nb = nb + 1
         return nb
@@ -328,7 +328,7 @@ class app(base_app):
         # Run the algorithm
         stdout = open(self.work_dir + 'stdout.txt', 'w')
         self.list_commands = ""
-        self.sizeSeeds = self.getSeedsSize()
+        #self.sizeSeeds = self.getSeedsSize()
         try:
             run_time = time.time()
             self.run_algo(stdout=stdout)
