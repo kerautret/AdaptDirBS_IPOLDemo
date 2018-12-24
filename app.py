@@ -151,9 +151,10 @@ class app(base_app):
         self.hasAtLeastOneMarker = not (not commandlist)
         mask = Image.new('P', size, 0)   # Create a grayscale image
         draw = ImageDraw.Draw(mask)
-
+        
         outSeeds = open(self.work_dir + 'seeds.dat', 'w')
         outTips = open(self.work_dir + 'tips.dat', 'w')
+        self.sizeSeeds = 0
         # need to recompute when user change param from an initial expe
 
         lastx = 0
