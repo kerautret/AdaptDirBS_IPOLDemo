@@ -155,7 +155,7 @@ class app(base_app):
         outSeeds = open(self.work_dir + 'seeds.dat', 'w')
         outTips = open(self.work_dir + 'tips.dat', 'w')
         # need to recompute when user change param from an initial expe
-        self.sizeSeeds = self.getSeedsSize()
+
         lastx = 0
         lasty = 0
         for (t, x, y) in commandlist:
@@ -328,7 +328,7 @@ class app(base_app):
         # Run the algorithm
         stdout = open(self.work_dir + 'stdout.txt', 'w')
         self.list_commands = ""
-
+        self.sizeSeeds = self.getSeedsSize()
         try:
             run_time = time.time()
             self.run_algo(stdout=stdout)
