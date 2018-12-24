@@ -165,7 +165,7 @@ class app(base_app):
         mask.putpalette([128, 128, 128] + [0, 0, 0]*253
                         + self.pencolors['red']+self.pencolors['green'])       
         mask.save(self.work_dir + 'mask.gif', transparency=0)
-
+        self.cfg['param']['sizeSeeds'] = self.sizeSeeds
       
 
 
@@ -271,7 +271,7 @@ class app(base_app):
             [(p,kwargs[p]) for p in self.default_param.keys() if p in kwargs])
 
         self.cfg['param']['negate'] = 'negate' in kwargs
-
+        self.sizeSeeds = self.cfg['param']['sizeSeeds']
         # Open image and inpainting domain mask
         img = Image.open(self.work_dir + 'input_0.png').convert('RGB')
         mask = Image.open(self.work_dir + 'mask.gif')
