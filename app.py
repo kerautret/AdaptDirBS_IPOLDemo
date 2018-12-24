@@ -155,7 +155,7 @@ class app(base_app):
         outSeeds = open(self.work_dir + 'seeds.dat', 'w')
         outTips = open(self.work_dir + 'tips.dat', 'w')
         # need to recompute when user change param from an initial expe
-        self.sizeSeeds = getSeedsSize(self)
+        self.sizeSeeds = self.getSeedsSize()
         lastx = 0
         lasty = 0
         for (t, x, y) in commandlist:
