@@ -59,6 +59,16 @@ class app(base_app):
         # Generate a new timestamp
         self.timestamp = int(100*time.time())
 
+
+    def getSeedsSize(self):
+        commandlist = self.readcommandlist()
+        nb = 0 
+        for (t, x, y) in commandlist:
+            if t == 'seeds' :
+                nb = nb + 1
+        return nb
+    
+        
     def build(self):
         """
         program build/update
@@ -133,7 +143,7 @@ class app(base_app):
         """
         Render the drawing commandlist into the mask
         """
-
+        
         commandlist = self.readcommandlist()
         size = image(self.work_dir + 'input_0.png').size
         self.cfg['param']['viewbox_width'] = size[0]
@@ -144,7 +154,8 @@ class app(base_app):
 
         outSeeds = open(self.work_dir + 'seeds.dat', 'w')
         outTips = open(self.work_dir + 'tips.dat', 'w')
-        self.sizeSeeds = 0
+        # need to recompute when user change param from an initial expe
+        self.sizeSeeds = getSeedsSize(self)
         lastx = 0
         lasty = 0
         for (t, x, y) in commandlist:
@@ -271,7 +282,7 @@ class app(base_app):
             [(p,kwargs[p]) for p in self.default_param.keys() if p in kwargs])
 
         self.cfg['param']['negate'] = 'negate' in kwargs
-        self.sizeSeeds = self.cfg['param']['sizeSeeds']
+
         # Open image and inpainting domain mask
         img = Image.open(self.work_dir + 'input_0.png').convert('RGB')
         mask = Image.open(self.work_dir + 'mask.gif')
