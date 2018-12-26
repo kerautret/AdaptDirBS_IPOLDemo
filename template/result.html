@@ -5,7 +5,7 @@
 <p>
 The algorithm result is displayed hereafter. The result was obtained by the following parameters:
 <ul>
-  <li><i><font color="blue">width </font></i>&nbsp;=&nbsp;${app.cfg['param']['width']}</li>
+  <li><i><font color="blue">width </font></i>&nbsp;:&nbsp;${app.cfg['param']['width']}</li>
 </ul>
 </p>
 
@@ -45,7 +45,15 @@ The algorithm result is displayed hereafter. The result was obtained by the foll
     </li>
     <li>
         <a href="${app.work_url + 'resultLines.png'}">
-          Image filtered
+          Detected Segments Points 
+        <span>
+            <img height="${app.cfg['param']['imageheightresized']}" src="${app.work_url + 'resultLinesPts.png'}" alt="" />
+        </span>
+        </a>
+    </li>
+    <li>
+        <a href="${app.work_url + 'resultLines.png'}">
+          Detected Segments 
         <span>
             <img height="${app.cfg['param']['imageheightresized']}" src="${app.work_url + 'resultLines.png'}" alt="" />
         </span>
