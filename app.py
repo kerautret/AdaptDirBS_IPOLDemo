@@ -352,6 +352,7 @@ class app(base_app):
                 info="result lines")
 #            ar.add_file("commands.txt", info="commands")
             ar.add_info({"width":  int(self.cfg['param']['width'])})
+            ar.add_info({"version": self.cfg['param']["version"]})
             ar.save()
 
         return self.tmpl_out("run.html")
@@ -444,7 +445,17 @@ class app(base_app):
         self.cfg['param']['imageheightresized'] = resultHeight
         self.cfg['param']['resultheight'] = max (200, resultHeight)
 
+        ## ------
+        # Save version num:
+        fVersion = open(self.work_dir+"version.txt", "w")
+        command_args = ['ipolDemo', '--version']
+        self.runCommand(command_args, None, fVersion)
+        fVersion.close()
+        f = open(self.work_dir+"version.txt", "r")
+        self.cfg['param']['version'] = f.read()
+        self.cfg.save()
 
+        
         # ## ----
         # ## Final step: save command line
         # ## ----
