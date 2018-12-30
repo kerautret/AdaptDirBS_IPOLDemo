@@ -3,6 +3,7 @@ Demonstration of paper: Adaptive Directional Tracking of Blurred Segments
 demo editor: Bertrand Kerautret
 """
 
+
 from lib import base_app, build, http, image
 from lib.misc import   ctime
 from lib.base_app import init_app
