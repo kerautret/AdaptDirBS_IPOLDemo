@@ -449,7 +449,7 @@ class app(base_app):
         # Save version num:
         fVersion = open(self.work_dir+"version.txt", "w")
         command_args = ['ipolDemo', '--version']
-        self.runCommand(command_args, None, fVersion)
+        self.runCommand(command_args, fVersion,None )
         fVersion.close()
         f = open(self.work_dir+"version.txt", "r")
         self.cfg['param']['version'] = f.read()
