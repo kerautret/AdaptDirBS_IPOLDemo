@@ -84,6 +84,7 @@ class app(base_app):
 
 
         
+        
         for f in prog_names:
             prog_bin_files.append(self.bin_dir+ f)
 
