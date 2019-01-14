@@ -23,8 +23,9 @@ class app(base_app):
 
     title = 'Adaptive Directional Tracking of Blurred Segments'
     xlink_article = 'http://www.ipol.im/'
-    xlink_src =  'https://github.com/kerautret/FBSD/archive/0.1.5.tar.gz'
-    demo_src_filename  = '0.1.5.tar.gz'
+    xlink_src =  'https://github.com/evenp/FBSD/archive/master.tar.gz'
+    demo_src_filename  = 'master.tar.gz'
+    base_src_name = 'FBSD-master'
     pensize = 3
     input_nb = 1
     input_max_pixels = 512 * 512        # max size (in pixels) of input image
@@ -99,7 +100,7 @@ class app(base_app):
             build.extract(tgz_file, self.src_dir)
 
             # build the program
-            build.run("cd %s; qmake ; make " %(self.src_dir+"IPOLdemo"), stdout=log_file)
+            build.run("cd %s; qmake ; make " %(self.src_dir+self.base_src_name+"IPOLdemo"), stdout=log_file)
             
             # save into bin dir
             if os.path.isdir(self.bin_dir):
