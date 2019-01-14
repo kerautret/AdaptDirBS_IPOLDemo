@@ -23,7 +23,7 @@ class app(base_app):
 
     title = 'Adaptive Directional Tracking of Blurred Segments'
     xlink_article = 'http://www.ipol.im/'
-    xlink_src =  'https://github.com/kerautret/FBSD/archive/master.tar.gz'
+    xlink_src =  'https://github.com/evenp/FBSD/archive/master.tar.gz'
     demo_src_filename  = 'master.tar.gz'
     base_src_name = 'FBSD-master'
     pensize = 3
@@ -109,11 +109,11 @@ class app(base_app):
             os.mkdir(self.bin_dir)
 
             for i in range(0, len(prog_bin_files)) :
-                shutil.copy(self.src_dir + os.path.join("IPOLdemo", \
+                shutil.copy(self.src_dir + self.base_src_name+os.path.join("IPOLdemo", \
                             prog_names[i]), prog_bin_files[i])
 
             for f in script_names :
-                shutil.copy(self.src_dir + os.path.join("IPOLdemo/Scripts", f), \
+                shutil.copy(self.src_dir + self.base_src_name + os.path.join("IPOLdemo/Scripts", f), \
                             self.bin_dir)
             
             # cleanup the source dir
