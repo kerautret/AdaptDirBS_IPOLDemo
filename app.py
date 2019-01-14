@@ -109,7 +109,7 @@ class app(base_app):
             os.mkdir(self.bin_dir)
 
             for i in range(0, len(prog_bin_files)) :
-                shutil.copy(self.src_dir + self.base_src_name+os.path.join("IPOLdemo", \
+                shutil.copy(self.src_dir + self.base_src_name + os.path.join("IPOLdemo", \
                             prog_names[i]), prog_bin_files[i])
 
             for f in script_names :
