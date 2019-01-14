@@ -25,7 +25,6 @@ class app(base_app):
     xlink_article = 'http://www.ipol.im/'
     xlink_src =  'https://github.com/evenp/FBSD/archive/master.tar.gz'
     demo_src_filename  = 'master.tar.gz'
-    base_src_name = 'FBSD-master'
     pensize = 3
     input_nb = 1
     input_max_pixels = 512 * 512        # max size (in pixels) of input image
@@ -101,7 +100,7 @@ class app(base_app):
             build.extract(tgz_file, self.src_dir)
 
             # build the program
-            build.run("cd %s; qmake ; make " %(self.src_dir+self.base_src_name+"/IPOLdemo"), stdout=log_file)
+            build.run("cd %s; qmake ; make " %(self.src_dir+"FBSD-master/IPOLdemo"), stdout=log_file)
             
             # save into bin dir
             if os.path.isdir(self.bin_dir):
@@ -109,11 +108,11 @@ class app(base_app):
             os.mkdir(self.bin_dir)
 
             for i in range(0, len(prog_bin_files)) :
-                shutil.copy(self.src_dir + self.base_src_name + os.path.join("IPOLdemo", \
+                shutil.copy(self.src_dir + os.path.join("FBSD-master/IPOLdemo", \
                             prog_names[i]), prog_bin_files[i])
 
             for f in script_names :
-                shutil.copy(self.src_dir + self.base_src_name + os.path.join("IPOLdemo/Scripts", f), \
+                shutil.copy(self.src_dir + os.path.join("FBSD-master/IPOLdemo/Scripts", f), \
                             self.bin_dir)
             
             # cleanup the source dir
