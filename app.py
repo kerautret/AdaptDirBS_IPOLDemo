@@ -23,8 +23,8 @@ class app(base_app):
 
     title = 'Adaptive Directional Tracking of Blurred Segments'
     xlink_article = 'http://www.ipol.im/'
-    xlink_src =  'http://ker.iutsd.univ-lorraine.fr/SrcCodeAdaptBS.tgz'
-    demo_src_filename  = 'SrcCodeAdaptBS.tgz'
+    xlink_src =  'https://github.com/evenp/FBSD/archive/master.zip'
+    demo_src_filename  = 'master.zip'
     pensize = 3
     input_nb = 1
     input_max_pixels = 512 * 512        # max size (in pixels) of input image
