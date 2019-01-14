@@ -99,7 +99,7 @@ class app(base_app):
             build.extract(tgz_file, self.src_dir)
 
             # build the program
-            build.run("cd %s; qmake ; make " %(self.src_dir+"Seg/IPOLdemo"), stdout=log_file)
+            build.run("cd %s; qmake ; make " %(self.src_dir+"IPOLdemo"), stdout=log_file)
             
             # save into bin dir
             if os.path.isdir(self.bin_dir):
@@ -107,11 +107,11 @@ class app(base_app):
             os.mkdir(self.bin_dir)
 
             for i in range(0, len(prog_bin_files)) :
-                shutil.copy(self.src_dir + os.path.join("Seg/IPOLdemo", \
+                shutil.copy(self.src_dir + os.path.join("IPOLdemo", \
                             prog_names[i]), prog_bin_files[i])
 
             for f in script_names :
-                shutil.copy(self.src_dir + os.path.join("Seg/IPOLdemo/Scripts", f), \
+                shutil.copy(self.src_dir + os.path.join("IPOLdemo/Scripts", f), \
                             self.bin_dir)
             
             # cleanup the source dir
