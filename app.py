@@ -23,7 +23,7 @@ class app(base_app):
 
     title = 'Adaptive Directional Tracking of Blurred Segments'
     xlink_article = 'http://www.ipol.im/'
-    xlink_src =  'https://github.com/evenp/FBSD/archive/master.tar.gz'
+    xlink_src =  'https://github.com/kerautret/FBSD/archive/master.tar.gz'
     demo_src_filename  = 'master.tar.gz'
     base_src_name = 'FBSD-master'
     pensize = 3
