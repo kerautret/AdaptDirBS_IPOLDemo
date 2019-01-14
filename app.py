@@ -100,7 +100,7 @@ class app(base_app):
             build.extract(tgz_file, self.src_dir)
 
             # build the program
-            build.run("cd %s; qmake ; make " %(self.src_dir+self.base_src_name+"IPOLdemo"), stdout=log_file)
+            build.run("cd %s; qmake ; make " %(self.src_dir+self.base_src_name+"/IPOLdemo"), stdout=log_file)
             
             # save into bin dir
             if os.path.isdir(self.bin_dir):
