@@ -33,6 +33,7 @@ class app(base_app):
     input_ext = '.png'                  # expected extension
     is_test = True       # switch to False for deployment
     default_param = {'width': 3,  # default parameters
+                     'minsize': 15,  # default parameters
                      'pensize': pensize,
                      'pencolor':'red'}
     pencolors = {'red'   : [255, 0, 0],'green'   : [0, 255, 0]}
@@ -355,6 +356,7 @@ class app(base_app):
                 info="result lines")
 #            ar.add_file("commands.txt", info="commands")
             ar.add_info({"width":  int(self.cfg['param']['width'])})
+            ar.add_info({"min size":  int(self.cfg['param']['minsize'])})
             ar.add_info({"version": self.cfg['param']["version"]})
             ar.save()
 
@@ -386,10 +388,10 @@ class app(base_app):
         inputHeight = image(self.work_dir + 'input_0.png').size[1]
         if self.sizeSeeds == 0 :            
             command_args = ['ipolDemo'] + \
-                           [ 'inputNG.pgm',  "outputContours.txt",  str(self.cfg['param']['width']) ]
+                           [ 'inputNG.pgm',  "outputContours.txt",  str(self.cfg['param']['width']), str(self.cfg['param']['minsize']) ]
         else :
             command_args = ['ipolDemo'] + \
-                           [ 'inputNG.pgm',  "outputContours.txt",  str(self.cfg['param']['width']), "seeds.dat"]
+                           [ 'inputNG.pgm',  "outputContours.txt",  str(self.cfg['param']['width']), str(self.cfg['param']['minsize']), "seeds.dat"]
         
         
         

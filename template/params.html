@@ -112,7 +112,7 @@ $(document).ready(function()
 {
     createLinkedSlider('#pensize', '#slider1', 1, 20, 2);
     createLinkedSlider('#width', '#slider2', 1, 10, 1);
-  
+    createLinkedSlider('#minsize', '#slider3', 2, 50, 1);  
   fillDisk($('#pensize').attr('value'));
     // Update pen preview image with pensize slider
     $('#pensize').blur(function()
@@ -149,7 +149,17 @@ $(document).ready(function()
       <div id="slider2" style="width:32em; float:left; margin-left:1em; margin-top:4px; font-size:10pt;"></div>
       <div style="clear:both"> </div>
     </li>
-  </ul>
+
+   <li>The minimal size of the resulting segments: </i>  <br>
+      <div style="float:left; width:8em; text-align:right;">
+        <font color="blue"><i>min size</i></font> :<input type="text" style="font-family:monospace; text-align:right;"
+                                                                   size="3" id="width" name="minsize" value="${'%i' % app.cfg['param']['minsize']}" />
+      </div>
+      <div id="slider3" style="width:32em; float:left; margin-left:1em; margin-top:4px; font-size:10pt;"></div>
+      <div style="clear:both"> </div>
+    </li>
+
+</ul>
 </p>
 
 <p style="clear:both;">Run the algorithm: <input type="submit" name="action" value="run" /><p/>
